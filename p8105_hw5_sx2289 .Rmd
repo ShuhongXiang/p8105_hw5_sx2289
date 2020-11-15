@@ -93,6 +93,21 @@ results_df %>%
 
 ## Problem 2
 
+Create path_df caontaining all data from the csv:
+
+```{r}
+path_df =
+  tibble(
+  path = list.files("lda_data"),
+) %>%
+  mutate(path = str_c("lda_data/", path),
+         data = map(path, read_csv)
+           )%>%
+  unnest(data)
+
+path_df
+
+```
 
 
 ## Problem 3
