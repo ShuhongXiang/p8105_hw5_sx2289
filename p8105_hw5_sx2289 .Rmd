@@ -13,8 +13,9 @@ library(rvest)
 knitr::opts_chunk$set(
 	echo = TRUE,
 	warning = FALSE,
-	fig.width = 8, 
-  fig.height = 6,
+	fig.width = 12, 
+  fig.height = 8,
+	fig.path='Figs/',
   out.width = "90%"
 )
 
@@ -93,7 +94,7 @@ results_df %>%
 
 ## Problem 2
 
-###Create path_df containing all data from the csv:
+### Create path_df containing all data from the csv:
 
 ```{r}
 path_df =
@@ -148,6 +149,8 @@ plot_p2 =
                 group = as.factor(id)),
             alpha = 0.5) +
   geom_smooth(aes(color = group), method = loess, se = F)
+
+ggsave("plot_p2.png", path = "Figs")
 
 plot_p2
 ```
