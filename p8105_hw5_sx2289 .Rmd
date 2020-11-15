@@ -93,7 +93,7 @@ results_df %>%
 
 ## Problem 2
 
-Create path_df caontaining all data from the csv:
+Create path_df containing all data from the csv:
 
 ```{r}
 path_df =
@@ -106,7 +106,31 @@ path_df =
   unnest(data)
 
 path_df
+```
 
+Clean the datafram:
+
+```{r}
+tidy_lda =
+  path_df %>%
+  mutate(
+    path = str_remove_all(path,"lda_data/"), 
+    path = str_remove_all(path,".csv")
+  ) %>%
+  separate(path, into = c("group","subject_id"), sep = 3) %>%
+  mutate(
+    subject_id = str_remove_all(subject_id, "_"),
+    group = str_replace(group,"con","control"),
+    group = str_replace(group,"exp","experiment")
+  )%>%
+  pivot_longer(
+    week_1:week_8,
+    names_prefix = "week_",
+    names_to = "week",
+    values_to = "weekly observations"
+  )%>%
+  mutate(week = as.numeric(week))
+tidy_lda
 ```
 
 
