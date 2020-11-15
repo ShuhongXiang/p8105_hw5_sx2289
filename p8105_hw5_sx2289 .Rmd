@@ -31,7 +31,7 @@ scale_fill_discrete = scale_fill_viridis_d
 
 ## Problem 1
 
-Load the data.
+### Load the data.
 
 ```{r}
 homcide_df =
@@ -59,7 +59,7 @@ aggregate_df =
   )
 ```
 
-Prop test for a dingle city: 
+### Prop test for a single city: 
 
 ```{r}
 prop.test(
@@ -68,7 +68,7 @@ prop.test(
   broom::tidy()
 ```
 
-Try to iterate:
+### Try to iterate:
 
 ```{r}
 results_df = 
@@ -93,7 +93,7 @@ results_df %>%
 
 ## Problem 2
 
-Create path_df containing all data from the csv:
+###Create path_df containing all data from the csv:
 
 ```{r}
 path_df =
@@ -108,7 +108,7 @@ path_df =
 path_df
 ```
 
-Clean the datafram:
+### Clean the datafram:
 
 ```{r}
 tidy_lda =
@@ -133,6 +133,26 @@ tidy_lda =
 tidy_lda
 ```
 
+### Make a spaghetti plot showing observations on each subject over time, and comment on differences between groups:
+
+```{r}
+plot_p2 =
+  tidy_lda %>%
+  unite("id", c(group, subject_id), sep = "_", remove = F) %>%
+  ggplot(aes(x = week,
+             y = `weekly observations`)) +
+  geom_point(aes(color = group,
+                group = id),
+             alpha = .5)+
+  geom_path(aes(color = group,
+                group = as.factor(id)),
+            alpha = 0.5) +
+  geom_smooth(aes(color = group), method = loess, se = F)
+
+plot_p2
+```
+
+From the graph above, we can see that the control groups and experiment groups began the study at the same level of weekly observations. As the study goes on, the control group remain steadily around the same level as beginning  whereas the experiment groups increase gradually. 
 
 ## Problem 3
 
