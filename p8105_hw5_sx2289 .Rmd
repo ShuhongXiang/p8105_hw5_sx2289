@@ -159,3 +159,13 @@ From the graph above, we can see that the control groups and experiment groups b
 
 ## Problem 3
 
+Conduct a simulation to explore power in a one-sample t-test.
+
+### First set the following design elements:
+
+```{r}
+n <- 30
+sigma <- 5
+```
+
+
