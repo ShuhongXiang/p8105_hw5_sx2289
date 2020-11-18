@@ -16,7 +16,8 @@ knitr::opts_chunk$set(
 	fig.width = 12, 
   fig.height = 8,
 	fig.path='Figs/',
-  out.width = "90%"
+  out.width = "90%",
+	options(digit = 3)
 )
 
 theme_set(theme_minimal() + theme(legend.position = "bottom"))
@@ -28,6 +29,7 @@ options(
 
 scale_colour_discrete = scale_colour_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
+
 ```
 
 ## Problem 1
@@ -168,4 +170,37 @@ n <- 30
 sigma <- 5
 ```
 
+### Set μ=0. Generate 5000 datasets from the model $$x ~ Normal[mu, sigma]$$
+
+```{r}
+mu_0 <- 0
+n_sim <- 5000
+
+set.seed(5000)
+
+ t_test_mu_0 = function(n = 30, mu, sigma = 5) {
+  
+  t_test_mu_0_df = tibble(
+    
+    x = rnorm(n, mu, sigma)
+  )
+  
+  t_test_mu_0_df %>%
+    summarise(
+      mu_estimated = mean(x),
+      p_val = t.test(x, conf.level = 0.95) %>% broom::tidy() %>% pull(p.value)
+    )
+}
+
+results_mu_0 = vector("list", n_sim)
+
+for(i in 1 : n_sim){
+  
+  results_mu_0[[i]] = t_test_mu_0(mu = mu_0)
+  
+}
+
+sim_mu_0 = bind_rows(results_mu_0)
+sim_mu_0
+```
 
