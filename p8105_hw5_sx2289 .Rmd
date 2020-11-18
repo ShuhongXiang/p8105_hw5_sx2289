@@ -254,6 +254,7 @@ ggplot(aes(x = mu, y = n/5000, fill = mu))+
 ggsave("The Power of the Test.png", path = "Figs")
 plot_power_test
 ```
+
 From the bar char above, we can see the power of test increase with the the true value of mu.The proportion of rejecting null reach 1 when mu greater than 3. The effect size is also 
 
 ### Make a plot showing the average estimate of μ̂ on the y axis and the true value of μ on the x axis. Make a second plot (or overlay on the first) the average estimate of μ̂ only in samples for which the null was rejected on the y axis and the true value of μ on the x axis. 
