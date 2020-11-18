@@ -227,3 +227,11 @@ for(i in 1:6){
   results_all
 ```
 
+For the plot, we combine the mu = 0:
+
+```{r}
+sim_all = bind_rows(results_all, sim_mu_0)
+```
+
+
+
