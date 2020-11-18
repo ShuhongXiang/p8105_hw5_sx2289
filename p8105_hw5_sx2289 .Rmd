@@ -289,5 +289,5 @@ ggsave("Average Estimate vs True mu.png", path = "Figs")
 
 #### Is the sample average of μ̂  across tests for which the null is rejected approximately equal to the true value of μ? Why or why not?
 
-Yes. From the graph above, we cannot see any obvious outliners or points are far away from the trend line in graph. Also, the two trend lines are close to each other. Therefore, the sample average of μ̂  across test is consistent with the true μ.
+Yes. From the graph above, we cannot see any obvious outliners. Also, the two trend lines are close to each other. Therefore, the sample average of μ̂  across test is consistent with the true μ.
 
