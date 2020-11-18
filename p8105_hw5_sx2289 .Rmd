@@ -227,11 +227,17 @@ for(i in 1:6){
   results_all
 ```
 
-For the plot, we combine the mu = 0:
+For the plot, we combine the mu = 0 to make a complete dataset:
 
 ```{r}
 sim_all = bind_rows(results_all, sim_mu_0)
 ```
+
+### Make a plot showing the proportion of times the null was rejected (the power of the test) on the y axis and the true value of μ on the x axis. Describe the association between effect size and power.
+
+### Make a plot showing the average estimate of $\hat{\mu}$ on the y axis and the true value of $\mu$ on the x axis. Make a second plot (or overlay on the first) the average estimate of $\hat{\mu}$ only in samples for which the null was rejected on the y axis and the true value of $\mu$ on the x axis. 
+
+#### Is the sample average of μ̂  across tests for which the null is rejected approximately equal to the true value of μ? Why or why not?
 
 
 
