@@ -163,14 +163,7 @@ From the graph above, we can see that the control groups and experiment groups b
 
 Conduct a simulation to explore power in a one-sample t-test.
 
-### First set the following design elements:
-
-```{r}
-n <- 30
-sigma <- 5
-```
-
-### Set μ=0. Generate 5000 datasets from the model $$x ~ Normal[mu, sigma]$$
+### First set n =30 and sigma =5 for the whole problem. Then, set μ=0. Generate 5000 datasets from the model $$x ~ Normal[mu, sigma]$$ :
 
 ```{r}
 mu_0 <- 0
@@ -180,12 +173,12 @@ set.seed(5000)
 
  t_test_mu_0 = function(n = 30, mu, sigma = 5) {
   
-  t_test_mu_0_df = tibble(
+  t_test_df = tibble(
     
-    x = rnorm(n, mu, sigma)
+    x = rnorm(n =30, mean = mu, sd = sigma)
   )
   
-  t_test_mu_0_df %>%
+  t_test_df %>%
     summarise(
       mu_estimated = mean(x),
       p_val = t.test(x, conf.level = 0.95) %>% broom::tidy() %>% pull(p.value)
@@ -202,5 +195,35 @@ for(i in 1 : n_sim){
 
 sim_mu_0 = bind_rows(results_mu_0)
 sim_mu_0
+```
+
+### Repeat the above for μ={1,2,3,4,5,6}:
+
+```{r}
+set.seed(5000)
+
+sim_t_test = function(n = 30, mu, sigma = 5) {
+  
+  results_6_mu = vector("list", n_sim)
+  
+  for(i in 1:n_sim){
+    
+    results_6_mu[[i]] = t_test_mu_0(mu = mu)
+    
+  }
+  results_sim_t_test = bind_rows(results_6_mu)
+}
+
+sim_6_mu = vector("list", 6)
+
+for(i in 1:6){
+  
+  sim_6_mu[[i]] = sim_t_test(mu = i)
+  
+}
+
+  results_all = bind_rows(sim_6_mu)
+
+  results_all
 ```
 
