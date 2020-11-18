@@ -238,7 +238,7 @@ sim_all
 ### Make a plot showing the proportion of times the null was rejected (the power of the test) on the y axis and the true value of μ on the x axis. Describe the association between effect size and power.
 
 ```{r}
-
+plot_power_test =
 sim_all  %>%
   filter(p_val < 0.5) %>%
   mutate(mu = as_factor(mu)) %>%
@@ -252,7 +252,7 @@ ggplot(aes(x = mu, y = n/5000, fill = mu))+
   )
 
 ggsave("The Power of the Test.png", path = "Figs")
-
+plot_power_test
 ```
 From the bar char above, we can see the power of test increase with the the true value of mu.The proportion of rejecting null reach 1 when mu greater than 3. The effect size is also 
 
@@ -274,6 +274,7 @@ reject_null_data = sim_all%>%
 
 plot_p3_data = combine(estimated_mu_data, reject_null_data)
 
+plot_average_vs_mu = 
 ggplot(plot_p3_data, aes(x = mu, y = mean_estimated_mu), group = group, color = group)+
     geom_point()+
   geom_smooth(aes(color = group))+
@@ -283,8 +284,8 @@ ggplot(plot_p3_data, aes(x = mu, y = mean_estimated_mu), group = group, color = 
     title = "The Average Estimate vs True mu"
   )
   
-
 ggsave("Average Estimate vs True mu.png", path = "Figs")
+plot_average_vs_mu
 ```
 
 #### Is the sample average of μ̂  across tests for which the null is rejected approximately equal to the true value of μ? Why or why not?
